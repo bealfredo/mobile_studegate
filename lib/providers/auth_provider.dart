@@ -1,15 +1,26 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mobile_studegate/models/aluno.dart';
+import 'package:http/http.dart' as http;
+import 'package:mobile_studegate/services/aluno_service.dart';
+import 'dart:convert';
 
 class AuthProvider extends ChangeNotifier {
   Aluno? _user;
   bool _isLoading = false;
   final String _boxName = 'auth_box';
+  String? _errorMessage;
 
   Aluno? get user => _user;
   bool get isLoggedIn => _user != null;
   bool get isLoading => _isLoading;
+  String? get errorMessage => _errorMessage;
+
+  // Limpar mensagem de erro
+  void clearError() {
+    _errorMessage = null;
+    notifyListeners();
+  }
 
   // Inicializar Hive na main.dart
   static Future<void> initHive() async {
@@ -35,8 +46,6 @@ class AuthProvider extends ChangeNotifier {
       'login': _user!.login,
       'cpf': _user!.cpf,
       'dataNascimento': _user!.dataNascimento.toIso8601String(),
-
-
     };
     
     await box.put('user_data', userData);
@@ -66,29 +75,92 @@ class AuthProvider extends ChangeNotifier {
   // Métodos login e logout
   Future<bool> login(String email, String password) async {
     _isLoading = true;
+    _errorMessage = null; // Limpa a mensagem de erro anterior
     notifyListeners();
 
     try {
-      await Future.delayed(Duration(seconds: 2));
+      // Chama o serviço de login com os parâmetros na ordem correta
+      http.Response response = await loginStudent(email, password);
+
+      // print('Status code: ${response.statusCode}');
+      // print('Response body: ${response.body}');
+
+      // Se recebeu uma resposta com corpo
+      if (response.body.isNotEmpty) {
+        try {
+          final responseData = jsonDecode(utf8.decode(response.bodyBytes));
+          
+          if (response.statusCode >= 400) {
+            _isLoading = false;
+            
+            // Extrai a mensagem de erro específica do campo auth
+            if (responseData.containsKey('errors') && 
+                responseData['errors'] is List && 
+                responseData['errors'].isNotEmpty) {
+              
+              for (final error in responseData['errors']) {
+                if (error['fieldName'] == 'auth') {
+                  _errorMessage = error['message']; // "Login ou senha inválidos"
+                  break;
+                }
+              }
+            }
+            
+            // Se não encontrou mensagem específica, usa a mensagem geral
+            if (_errorMessage == null && responseData.containsKey('message')) {
+              _errorMessage = responseData['message']; // "Erro de validação."
+            }
+            
+            // Mensagem padrão se nenhuma mensagem foi encontrada
+            _errorMessage ??= 'Erro ao fazer login. Tente novamente.';
+            
+            // print('Erro de autenticação: $_errorMessage');
+            notifyListeners();
+            return false;
+          }
+          
+          // Login bem-sucedido - processa os dados do usuário
+          try {
+            _user = Aluno.fromJson(responseData);
+            await _saveUserData();
+            _isLoading = false;
+            notifyListeners();
+            return true;
+          } catch (e) {
+            _isLoading = false;
+            _errorMessage = 'Erro ao processar dados do usuário: $e';
+            notifyListeners();
+            return false;
+          }
+          
+        } catch (e) {
+          // Erro ao processar o JSON
+          _isLoading = false;
+          _errorMessage = 'Erro ao processar resposta do servidor';
+          // print('Erro ao processar JSON: $e');
+          notifyListeners();
+          return false;
+        }
+      } 
+      // Resposta sem corpo
+      else if (response.statusCode >= 400) {
+        _isLoading = false;
+        _errorMessage = 'Erro no servidor (${response.statusCode})';
+        notifyListeners();
+        return false;
+      }
       
-      _user = Aluno(
-        id: '123',
-        matricula: '2023001',
-        periodoAtual: 1,
-        matriculaPendente: false,
-        nome: 'João',
-        sobrenome: 'Silva',
-        login: email,
-        cpf: '12345678901',
-        dataNascimento: DateTime(2000, 1, 1),
-      );
-      
-      await _saveUserData();
+      // Chegou aqui, mas não deveria (caso inesperado)
       _isLoading = false;
+      _errorMessage = 'Resposta inesperada do servidor';
       notifyListeners();
-      return true;
+      return false;
+      
     } catch (e) {
+      // Erro de conexão ou outro erro inesperado
       _isLoading = false;
+      _errorMessage = 'Erro de conexão: verifique sua internet';
+      // print('Erro de conexão: $e');
       notifyListeners();
       return false;
     }

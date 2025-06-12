@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Aluno {
-  String id;
+  int id;
   // DateTime createdAt;
   // String title; 
   // String creator;
@@ -22,16 +22,7 @@ class Aluno {
   DateTime dataNascimento;
   
   Aluno({
-    // required this.id,
-    // required this.createdAt,
-    // required this.title,
-    // required this.creator,
-    // required this.type,
-    // required this.genre,
-    // required this.synopsis,
-    // required this.releaseDate,
-    // this.averageRating = 0.0,
-    // this.reviewCount = 0,
+
     required this.id,
     required this.periodoAtual,
     required this.matricula,
@@ -45,14 +36,6 @@ class Aluno {
 
   factory Aluno.fromJson(Map<String, dynamic> json) {
     return Aluno(
-      // id: json['id'],
-      // createdAt: DateTime.parse(json['createdAt']),
-      // title: json['title'],
-      // creator: json['creator'],
-      // type: json['type'],
-      // genre: json['genre'],
-      // synopsis: json['synopsis'],
-      // releaseDate: DateTime.parse(json['releaseDate']),
       id: json['id'],
       periodoAtual: json['periodoAtual'],
       matricula: json['matricula'],
@@ -67,14 +50,6 @@ class Aluno {
 
   Map<String, dynamic> toJson() {
     return {
-      // 'id': id,
-      // 'createdAt': createdAt.toIso8601String(),
-      // 'title': title,
-      // 'creator': creator,
-      // 'type': type,
-      // 'genre': genre,
-      // 'synopsis': synopsis,
-      // 'releaseDate': releaseDate.toIso8601String(),
       'id': id,
       'periodoAtual': periodoAtual,
       'matricula': matricula,

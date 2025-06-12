@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       
                       if (!success && mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Falha no login')),
+                          SnackBar(content: Text(authProvider.errorMessage ?? 'Erro ao fazer login')),
                         );
                       }
                     },
