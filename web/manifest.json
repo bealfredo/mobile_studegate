@@ -1,6 +1,6 @@
 {
-    "name": "reviewall_mobile",
-    "short_name": "reviewall_mobile",
+    "name": "mobile_studegate",
+    "short_name": "mobile_studegate",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

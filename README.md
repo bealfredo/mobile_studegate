@@ -1,4 +1,4 @@
-# reviewall_mobile
+# mobile_studegate
 
 Aplicativo Flutter para gerenciar e avaliar diversos tipos de mídias, como filmes, séries, livros, jogos e muito mais.
 

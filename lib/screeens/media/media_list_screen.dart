@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:reviewall_mobile/components/media_list.dart';
-import 'package:reviewall_mobile/main.dart';
-import 'package:reviewall_mobile/screeens/media/media_add_screen.dart';
+import 'package:mobile_studegate/widgets/media_list.dart';
+import 'package:mobile_studegate/main.dart';
+import 'package:mobile_studegate/screeens/media/media_add_screen.dart';
 
 class MediaListScaffold extends StatefulWidget {
   const MediaListScaffold({super.key});

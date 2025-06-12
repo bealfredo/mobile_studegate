@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:reviewall_mobile/models/media_model.dart';
+import 'package:mobile_studegate/models/media_model.dart';
 
-import 'package:reviewall_mobile/main.dart';
-import 'package:reviewall_mobile/services/review_service.dart';
+import 'package:mobile_studegate/main.dart';
+import 'package:mobile_studegate/services/review_service.dart';
 
 class FormAddReviewScaffold extends StatefulWidget {
   final Media media;

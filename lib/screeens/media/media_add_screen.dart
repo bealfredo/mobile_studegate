@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:reviewall_mobile/main.dart';
-import 'package:reviewall_mobile/models/media_model.dart';
-import 'package:reviewall_mobile/services/media_service.dart';
+import 'package:mobile_studegate/main.dart';
+import 'package:mobile_studegate/models/media_model.dart';
+import 'package:mobile_studegate/services/media_service.dart';
 
 // Lista de gêneros
 final List<String> sugestGeneros = [

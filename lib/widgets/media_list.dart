@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:reviewall_mobile/models/review_model.dart';
-import 'package:reviewall_mobile/models/media_model.dart';
-import 'package:reviewall_mobile/screeens/media/media_details_screen.dart';
-import 'package:reviewall_mobile/services/media_service.dart';
-import 'package:reviewall_mobile/services/review_service.dart';
+import 'package:mobile_studegate/models/review_model.dart';
+import 'package:mobile_studegate/models/media_model.dart';
+import 'package:mobile_studegate/screeens/media/media_details_screen.dart';
+import 'package:mobile_studegate/services/media_service.dart';
+import 'package:mobile_studegate/services/review_service.dart';
 
 
 class MediaList extends StatefulWidget {

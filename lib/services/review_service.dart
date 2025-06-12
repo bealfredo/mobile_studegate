@@ -1,9 +1,9 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:reviewall_mobile/models/review_model.dart';
+import 'package:mobile_studegate/models/review_model.dart';
 
-import 'package:reviewall_mobile/main.dart';
+import 'package:mobile_studegate/main.dart';
 
 
 Future<dynamic> getReviews() async {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:reviewall_mobile/models/review_model.dart';
+import 'package:mobile_studegate/models/review_model.dart';
 
-import 'package:reviewall_mobile/services/review_service.dart';
+import 'package:mobile_studegate/services/review_service.dart';
 
 class ReviewListWidget extends StatelessWidget {
   final List<Review> reviews;

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:reviewall_mobile/main.dart';
-import 'package:reviewall_mobile/models/media_model.dart';
+import 'package:mobile_studegate/main.dart';
+import 'package:mobile_studegate/models/media_model.dart';
 
 Future<dynamic> getMedias() async {
   var url = Uri.parse('$baseUrlApi/media');
