@@ -52,8 +52,13 @@ class AuthProvider extends ChangeNotifier {
       'login': _user!.login,
       'cpf': _user!.cpf,
       'dataNascimento': _user!.dataNascimento.toIso8601String(),
+      'cursos': _user!.cursos.map((curso) => curso.toJson()).toList(),
     };
+
+    // final userData = _user!.toJson();
     
+    // print('Salvando usuário no Hive: $_user');
+
     await box.put('user_data', userData);
   }
   
@@ -63,19 +68,13 @@ class AuthProvider extends ChangeNotifier {
     final userData = box.get('user_data');
     
     if (userData != null) {
-      _user = Aluno(
-        id: userData['id'],
-        matricula: userData['matricula'],
-        periodoAtual: userData['periodoAtual'],
-        matriculaPendente: userData['matriculaPendente'],
-        nome: userData['nome'],
-        sobrenome: userData['sobrenome'],
-        imagens: List<String>.from(userData['imagens'] ?? []),
-        imagemPrincipal: userData['imagemPrincipal'] ?? '',
-        login: userData['login'],
-        cpf: userData['cpf'],
-        dataNascimento: DateTime.parse(userData['dataNascimento']),
-      );
+      try {
+        print('Usuário carregado do Hive: ${userData}');
+        _user = Aluno.fromJson(userData);
+      } catch (e) {
+        print('Erro ao carregar usuário do Hive: $e');
+        _user = null;
+      }
     } else {
       _user = null;
     }
