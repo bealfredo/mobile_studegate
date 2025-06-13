@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_studegate/screeens/situacao_academica/upload_foto_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_studegate/models/curso.dart';
 import 'package:mobile_studegate/providers/auth_provider.dart';
 import 'package:mobile_studegate/main.dart';
+import 'package:mobile_studegate/services/aluno_service.dart';
+// import 'package:mobile_studegate/views/upload_imagem_aluno.dart'; // Certifique-se que esse caminho está correto
 
-class SituacaoAcademicaViewScreen extends StatelessWidget {
+class SituacaoAcademicaViewScreen extends StatefulWidget {
   final Curso curso;
 
-  const SituacaoAcademicaViewScreen({Key? key, required this.curso}) : super(key: key);
+  const SituacaoAcademicaViewScreen({super.key, required this.curso});
 
+  @override
+  State<SituacaoAcademicaViewScreen> createState() => _SituacaoAcademicaViewScreenState();
+}
+
+class _SituacaoAcademicaViewScreenState extends State<SituacaoAcademicaViewScreen> {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
@@ -16,7 +24,6 @@ class SituacaoAcademicaViewScreen extends StatelessWidget {
 
     final userImage =
         '$baseUrlApi/alunos/${user?.id}/download/imagem/${user?.imagemPrincipal}';
-
 
     return Scaffold(
       appBar: AppBar(
@@ -26,12 +33,10 @@ class SituacaoAcademicaViewScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          '${curso.nome} (Matriculado)',
+          '${widget.curso.nome} (Matriculado)',
           style: const TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
-      
-
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -47,53 +52,86 @@ class SituacaoAcademicaViewScreen extends StatelessWidget {
               ),
             ),
           ),
-
-        const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipOval(
-                child: Image.network(
-                  userImage,
-                  width: 120,
-                  height: 120,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: 200,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        shape: BoxShape.circle,
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UploadFotoScreen(),
                       ),
-                      child: Icon(
-                        Icons.person,
-                        size: 60,
-                        color: Colors.grey[600],
-                      ),
-                    );
+                    ).then((result) {
+                      if (result == true) {
+                        setState(() {}); // Atualiza imagem
+                      }
+                    });
                   },
+                  child: Stack(
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          userImage,
+                          width: 120,
+                          height: 120,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              width: 120,
+                              height: 120,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.person,
+                                size: 60,
+                                color: Colors.grey[600],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 4,
+                        right: 4,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.blue[800],
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: const Icon(
+                            Icons.camera_alt,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: 24),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildInfo("Nº de Matrícula", user?.matricula ?? ''),
-                    _buildInfo("Nome", "${user?.nome ?? ''} ${user?.sobrenome ?? ''}"),
-                    _buildInfo("Curso", curso.nome),
-                    _buildInfo("Situação", "Matriculado"),
-                  ],
+                const SizedBox(width: 24),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildInfo("Nº de Matrícula", user?.matricula ?? ''),
+                      _buildInfo("Nome", "${user?.nome ?? ''} ${user?.sobrenome ?? ''}"),
+                      _buildInfo("Curso", widget.curso.nome),
+                      _buildInfo("Situação", "Matriculado"),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: 24),
-
+          const SizedBox(height: 24),
           const Padding(
             padding: EdgeInsets.all(16),
             child: Text(
@@ -104,7 +142,6 @@ class SituacaoAcademicaViewScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 8),

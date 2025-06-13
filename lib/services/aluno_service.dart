@@ -1,8 +1,14 @@
 import 'dart:convert';
-
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile_studegate/main.dart';
-import 'package:mobile_studegate/models/media_model.dart';
+// ignore: depend_on_referenced_packages
+import 'package:http_parser/http_parser.dart';
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart' as path;
+
 
 // Future<dynamic> getMedias() async {
 //   var url = Uri.parse('$baseUrlApi/media');
@@ -108,4 +114,34 @@ Future<http.Response> updateAluno(String id, Map<String, dynamic> alunoContato) 
 
   return response;
 
+}
+
+
+Future<http.Response> uploadImagemAluno(String userId, XFile imagem) async {
+  final uri = Uri.parse('$baseUrlApi/alunos/$userId/upload/imagem');
+
+  var request = http.MultipartRequest('PATCH', uri); // Corrigido de POST para PATCH
+
+  if (kIsWeb) {
+    // Web: lê os bytes do arquivo e envia como multipart com nome do campo "imagem"
+    var byteData = await imagem.readAsBytes();
+    var multipartFile = http.MultipartFile.fromBytes(
+      'imagem', // nome do campo conforme Swagger
+      byteData,
+      filename: imagem.name,
+      contentType: MediaType('image', 'png'), // ajuste o tipo se necessário
+    );
+    request.files.add(multipartFile);
+  } else {
+    // Android/iOS: usa fromPath com nome do campo correto
+    var multipartFile = await http.MultipartFile.fromPath(
+      'imagem', // nome do campo conforme Swagger
+      imagem.path,
+      filename: imagem.name,
+    );
+    request.files.add(multipartFile);
+  }
+
+  final streamedResponse = await request.send();
+  return http.Response.fromStream(streamedResponse);
 }

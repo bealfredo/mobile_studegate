@@ -4,9 +4,6 @@ import 'package:mobile_studegate/models/aluno.dart';
 import 'package:mobile_studegate/models/curso.dart';
 import 'package:mobile_studegate/models/disciplina.dart';
 import 'package:mobile_studegate/screeens/boletim/boletim_table.dart';
-import 'package:mobile_studegate/widgets/media_list.dart';
-import 'package:mobile_studegate/main.dart';
-import 'package:mobile_studegate/screeens/media/media_add_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_studegate/providers/auth_provider.dart';
 

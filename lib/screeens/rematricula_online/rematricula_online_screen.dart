@@ -1,8 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:mobile_studegate/widgets/media_list.dart';
 import 'package:mobile_studegate/main.dart';
-import 'package:mobile_studegate/screeens/media/media_add_screen.dart';
 
 class RematriculaOnlineScaffold extends StatefulWidget {
   const RematriculaOnlineScaffold({super.key});
@@ -24,20 +22,25 @@ class _RematriculaOnlineScaffoldState extends State<RematriculaOnlineScaffold> {
         ),
         backgroundColor: primaryColor,
       ),
-      body: MediaList(key: _listKey), 
+      body: Center(
+        child: Text(
+          'Em desenvolvimento',
+          style: TextStyle(fontSize: 20, color: Colors.blue[900]),
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final result = await Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const FormAddMediaScaffold()),
-          );
+          // final result = await Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => const FormAddMediaScaffold()),
+          // );
 
-          if (result == true) {
-            // Atualiza a tela após adicionar uma nova mídia
-            setState(() {
-              _listKey = UniqueKey();
-            });
-          }
+          // if (result == true) {
+          //   // Atualiza a tela após adicionar uma nova mídia
+          //   setState(() {
+          //     _listKey = UniqueKey();
+          //   });
+          // }
         },
         backgroundColor: primaryColorLight,
         foregroundColor: fontColor,
