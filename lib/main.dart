@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mobile_studegate/screeens/analise_curricular/analise_curricular_screen.dart';
 import 'package:mobile_studegate/screeens/boletim/boletim_screen.dart';
 import 'package:mobile_studegate/screeens/grade_curricular/grade_curricular_screen.dart';
 import 'package:mobile_studegate/screeens/home/home_screen.dart';
-import 'package:mobile_studegate/screeens/media/media_list_screen.dart';
 import 'package:mobile_studegate/screeens/login/login_screen.dart'; // Supondo que você tenha uma tela de login
 import 'package:mobile_studegate/screeens/rematricula_online/rematricula_online_screen.dart';
 import 'package:mobile_studegate/screeens/situacao_academica/situacao_academica_screen.dart';
 import 'package:provider/provider.dart';
+
 import 'providers/auth_provider.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 
 const baseUrlApi = 'http://localhost:8080';
@@ -159,11 +160,11 @@ class _NavigationExampleState extends State<NavigationExample> {
         ],
       ),
       body: <Widget>[
-        HomeScreen(onNavigate: navigateToPage), // Passando a função
-        MediaListScaffold(),
+        HomeScreen(onNavigate: navigateToPage),
         BoletimScaffold(),
         GradeCurricularScaffold(),
         RematriculaOnlineScaffold(),
+        AnaliseCurricularScaffold(),
         SituacaoAcademicaScaffold(),
       ][currentPageIndex],
     );

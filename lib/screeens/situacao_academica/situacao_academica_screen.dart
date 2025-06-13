@@ -1,8 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:mobile_studegate/widgets/media_list.dart';
 import 'package:mobile_studegate/main.dart';
-import 'package:mobile_studegate/screeens/media/media_add_screen.dart';
+import 'package:mobile_studegate/providers/auth_provider.dart';
+import 'package:mobile_studegate/screeens/boletim/boletim_view.dart';
+import 'package:mobile_studegate/screeens/grade_curricular/grade_curricular_view_screen.dart';
+import 'package:mobile_studegate/screeens/situacao_academica/situacao_academica_view_screen.dart';
+import 'package:provider/provider.dart';
 
 class SituacaoAcademicaScaffold extends StatefulWidget {
   const SituacaoAcademicaScaffold({super.key});
@@ -14,7 +17,7 @@ class SituacaoAcademicaScaffold extends StatefulWidget {
 class _SituacaoAcademicaScaffoldState extends State<SituacaoAcademicaScaffold> {
   Key _listKey = UniqueKey();
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -24,24 +27,79 @@ class _SituacaoAcademicaScaffoldState extends State<SituacaoAcademicaScaffold> {
         ),
         backgroundColor: primaryColor,
       ),
-      body: MediaList(key: _listKey), 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final result = await Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const FormAddMediaScaffold()),
-          );
-
-          if (result == true) {
-            // Atualiza a tela após adicionar uma nova mídia
-            setState(() {
-              _listKey = UniqueKey();
-            });
+      body: Consumer<AuthProvider>(
+        builder: (context, authProvider, _) {
+          final user = authProvider.user;
+          
+          if (user == null) {
+            return const Center(child: Text('Usuário não encontrado'));
           }
+          
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Selecione o Curso',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[900],
+                  ),
+                ),
+              ),
+              
+              Expanded(
+                child: user.cursos.isEmpty
+                    ? const Center(child: Text('Nenhum curso encontrado'))
+                    : ListView.separated(
+                        itemCount: user.cursos.length,
+                        separatorBuilder: (context, index) => const Divider(height: 1),
+                        itemBuilder: (context, index) {
+                          final curso = user.cursos[index];
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: index % 2 == 0 
+                                ? Colors.grey[100] 
+                                : Colors.white,
+                              border: Border.all(color: Colors.grey[300]!),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                '${curso.nome}/${curso.codigo} (Matriculado)',
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                              trailing: TextButton(
+                                onPressed: () {
+                                  // Navegar para detalhes do curso quando "Acessar" for clicado
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SituacaoAcademicaViewScreen(curso: curso),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'ACESSAR',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                      fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, 
+                                vertical: 8
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+              ),
+            ],
+          );
         },
-        backgroundColor: primaryColorLight,
-        foregroundColor: fontColor,
-        child: const Icon(Icons.add),
       ),
     );
   }

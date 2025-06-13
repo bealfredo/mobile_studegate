@@ -69,10 +69,10 @@ class AuthProvider extends ChangeNotifier {
     
     if (userData != null) {
       try {
-        print('Usuário carregado do Hive: ${userData}');
+        // print('Usuário carregado do Hive: ${userData}');
         _user = Aluno.fromJson(userData);
       } catch (e) {
-        print('Erro ao carregar usuário do Hive: $e');
+        // print('Erro ao carregar usuário do Hive: $e');
         _user = null;
       }
     } else {

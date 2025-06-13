@@ -1,36 +1,36 @@
 class MatriculaDisciplina {
-  int id;
-  double a1;
-  double a2;
-  double exameFinal;
-  int frequencia;
-  double mediaFinal;
-  String statusMatriculaDisciplina;
+  final int id;
+  final double? a1;          
+  final double? a2;          
+  final double? exameFinal;  
+  final int? frequencia;     
+  final double? mediaFinal;  
+  final String statusMatriculaDisciplina;
 
   MatriculaDisciplina({
     required this.id,
-    required this.a1,
-    required this.a2,
-    required this.exameFinal,
-    required this.frequencia,
-    required this.mediaFinal,
-    required this.statusMatriculaDisciplina,
+    this.a1,         
+    this.a2,         
+    this.exameFinal, 
+    this.frequencia, 
+    this.mediaFinal, 
+    required this.statusMatriculaDisciplina, // Mantive required pois o status é importante
   });
 
-  factory MatriculaDisciplina.fromJson(dynamic jsonData) {
-    final json = jsonData as Map;
-
+  // Se você tem um método fromJson, atualize-o também:
+  factory MatriculaDisciplina.fromJson(Map<dynamic, dynamic> json) {
     return MatriculaDisciplina(
       id: json['id'],
-      a1: (json['a1'] as num).toDouble(),
-      a2: (json['a2'] as num).toDouble(),
-      exameFinal: (json['exameFinal'] as num).toDouble(),
+      a1: json['a1'] != null ? (json['a1'] as num).toDouble() : null,
+      a2: json['a2'] != null ? (json['a2'] as num).toDouble() : null,
+      exameFinal: json['exameFinal'] != null ? (json['exameFinal'] as num).toDouble() : null,
       frequencia: json['frequencia'],
-      mediaFinal: (json['mediaFinal'] as num).toDouble(),
+      mediaFinal: json['mediaFinal'] != null ? (json['mediaFinal'] as num).toDouble() : null,
       statusMatriculaDisciplina: json['statusMatriculaDisciplina'],
     );
   }
 
+  // Se você tem um método toJson, atualize-o também:
   Map<String, dynamic> toJson() {
     return {
       'id': id,
