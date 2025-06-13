@@ -238,16 +238,16 @@ class _EditarAlunoScreenState extends State<EditarAlunoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'INFORMAÇÕES PESSOAIS',
+          'REMATRÍCULA - Atualizar dados Pessoais',
           style: TextStyle(color: fontColor),
         ),
         backgroundColor: primaryColor,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: fontColor),
-          onPressed: () {
-            Navigator.pop(context, false);
-          },
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back, color: fontColor),
+        //   onPressed: () {
+        //     // Navigator.pop(context, false);
+        //   },
+        // ),
       ),
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, _) {

@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import 'providers/auth_provider.dart';
 
 
-const baseUrlApi = 'http://localhost:8080';
+const baseUrlApi = 'http://31.97.43.187:80';
 
 const Color primaryGray = Color(0xFF333333); 
 const Color secondaryGray = Color(0xFF4D4D4D);
