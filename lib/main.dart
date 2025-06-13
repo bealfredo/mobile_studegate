@@ -100,6 +100,12 @@ class NavigationExample extends StatefulWidget {
 class _NavigationExampleState extends State<NavigationExample> {
   int currentPageIndex = 0;
 
+  // Adicione este método para navegar para uma página específica
+  void navigateToPage(int index) {
+    setState(() {
+      currentPageIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +159,7 @@ class _NavigationExampleState extends State<NavigationExample> {
         ],
       ),
       body: <Widget>[
-        HomeScreen(), // Exemplo: botão para deslogar
+        HomeScreen(onNavigate: navigateToPage), // Passando a função
         MediaListScaffold(),
         BoletimScaffold(),
         GradeCurricularScaffold(),
