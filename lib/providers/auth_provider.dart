@@ -53,6 +53,18 @@ class AuthProvider extends ChangeNotifier {
       'cpf': _user!.cpf,
       'dataNascimento': _user!.dataNascimento.toIso8601String(),
       'cursos': _user!.cursos.map((curso) => curso.toJson()).toList(),
+      'corRaca': _user!.corRaca,
+      'uf': _user!.uf,
+      'cidade': _user!.cidade,
+      'bairro': _user!.bairro,
+      'cep': _user!.cep,
+      'logradouro': _user!.logradouro,
+      'numero': _user!.numero,
+      'complemento': _user!.complemento,
+      'emailPessoal': _user!.emailPessoal,
+      'telefoneCelular1': _user!.telefoneCelular1,
+      'telefoneCelular2': _user!.telefoneCelular2,
+      'telefoneFixo': _user!.telefoneFixo,
     };
 
     // final userData = _user!.toJson();

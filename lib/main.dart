@@ -5,6 +5,7 @@ import 'package:mobile_studegate/screeens/boletim/boletim_screen.dart';
 import 'package:mobile_studegate/screeens/grade_curricular/grade_curricular_screen.dart';
 import 'package:mobile_studegate/screeens/home/home_screen.dart';
 import 'package:mobile_studegate/screeens/login/login_screen.dart'; // Supondo que você tenha uma tela de login
+import 'package:mobile_studegate/screeens/rematricula_online/rematricula_edit_aluno_screen.dart';
 import 'package:mobile_studegate/screeens/rematricula_online/rematricula_online_screen.dart';
 import 'package:mobile_studegate/screeens/situacao_academica/situacao_academica_screen.dart';
 import 'package:provider/provider.dart';
@@ -163,7 +164,7 @@ class _NavigationExampleState extends State<NavigationExample> {
         HomeScreen(onNavigate: navigateToPage),
         BoletimScaffold(),
         GradeCurricularScaffold(),
-        RematriculaOnlineScaffold(),
+        EditarAlunoScreen(),
         AnaliseCurricularScaffold(),
         SituacaoAcademicaScaffold(),
       ][currentPageIndex],

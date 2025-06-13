@@ -71,3 +71,41 @@ Future<http.Response> loginStudent(String login, String senha) async {
     rethrow;
   }
 }
+
+// Exemplo específico com os campos da chamada CURL
+// Future<bool> atualizarInformacoesContato(int alunoId) async {
+Future<http.Response> updateAluno(String id, Map<String, dynamic> alunoContato) async {
+
+
+  // Validar e processar os dados do aluno
+  // Os campos são baseados no modelo necessário para atualizar informações de contato
+  // O mapa alunoContato será sobrescrito com os dados para a atualização
+  alunoContato = {
+    "corRaca": alunoContato["corRaca"] ?? alunoContato["corRaca"],
+    "uf": alunoContato["uf"] ?? alunoContato["uf"],
+    "cidade": alunoContato["cidade"] ?? alunoContato["cidade"],
+    "bairro": alunoContato["bairro"] ?? alunoContato["bairro"],
+    "cep": alunoContato["cep"] ?? alunoContato["cep"],
+    "logradouro": alunoContato["logradouro"] ?? alunoContato["logradouro"],
+    "numero": alunoContato["numero"] ?? alunoContato["numero"],
+    "complemento": alunoContato["complemento"] ?? alunoContato["complemento"],
+    "emailPessoal": alunoContato["emailPessoal"] ?? alunoContato["emailPessoal"],
+    "telefoneCelular1": alunoContato["telefoneCelular1"] ?? alunoContato["telefoneCelular1"],
+    "telefoneCelular2": alunoContato["telefoneCelular2"] ?? alunoContato["telefoneCelular2"],
+    "telefoneFixo": alunoContato["telefoneFixo"] ?? alunoContato["telefoneFixo"]
+  };
+  
+
+  final url = Uri.parse('$baseUrlApi/alunos/$id');
+  final response = await http.patch(
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+      'accept': '*/*',
+    },
+    body: jsonEncode(alunoContato),
+  );
+
+  return response;
+
+}
