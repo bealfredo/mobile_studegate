@@ -11,14 +11,9 @@ class HomeScreen extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context);
     final user = authProvider.user;
 
-    final userImage = '$baseUrlApi/alunos/${user?.id}/download/imagem/${user?.imagemPrincipal}';
-
-    // print('User Image URL: $userImage');
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text('StudeGate'),
         actions: [
           IconButton(
@@ -55,7 +50,7 @@ class HomeScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.black, primaryColor],
+            colors: [Theme.of(context).colorScheme.primary, primaryColor],
           ),
         ),
         child: Center(
@@ -63,8 +58,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.network(
-                // 'http://31.97.43.187/plantas/2/download/imagem/1e9b9d12-8e29-4ce9-b966-a637fad33916.jpg',
-                userImage,
+                'http://31.97.43.187/plantas/2/download/imagem/1e9b9d12-8e29-4ce9-b966-a637fad33916.jpg',
                 width: 200,
                 height: 200,
                 fit: BoxFit.cover,
@@ -89,9 +83,8 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
-              SizedBox(height: 40),
               Text(
-                'Bem-vindo(a), ${user?.nome ?? 'Usuário'}',
+                'Bem vindo, ${user?.nome ?? 'Usuário'}',
                 style: TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
@@ -104,18 +97,18 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18, color: Colors.white70),
               ),
               SizedBox(height: 40),
-              // ElevatedButton.icon(
-              //   icon: Icon(Icons.logout),
-              //   label: Text('Sair da conta'),
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Colors.white,
-              //     foregroundColor: Theme.of(context).colorScheme.primary,
-              //     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              //   ),
-              //   onPressed: () {
-              //     authProvider.logout();
-              //   },
-              // ),
+              ElevatedButton.icon(
+                icon: Icon(Icons.logout),
+                label: Text('Sair da conta'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                ),
+                onPressed: () {
+                  authProvider.logout();
+                },
+              ),
             ],
           ),
         ),

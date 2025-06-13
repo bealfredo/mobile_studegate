@@ -17,6 +17,8 @@ class Aluno {
   bool matriculaPendente;
   String nome;
   String sobrenome;
+  List<String> imagens;
+  String imagemPrincipal;
   String login;
   String cpf;
   DateTime dataNascimento;
@@ -29,6 +31,8 @@ class Aluno {
     required this.matriculaPendente,
     required this.nome,
     required this.sobrenome,
+    required this.imagens,
+    required this.imagemPrincipal,
     required this.login,
     required this.cpf,
     required this.dataNascimento
@@ -42,6 +46,8 @@ class Aluno {
       matriculaPendente: json['matriculaPendente'],
       nome: json['nome'],
       sobrenome: json['sobrenome'],
+      imagens: List<String>.from(json['imagens'] ?? []),
+      imagemPrincipal: json['imagemPrincipal'] ?? '',
       login: json['login'],
       cpf: json['cpf'],
       dataNascimento: DateTime.parse(json['dataNascimento']),
@@ -56,6 +62,8 @@ class Aluno {
       'matriculaPendente': matriculaPendente,
       'nome': nome,
       'sobrenome': sobrenome,
+      'imagens': imagens,
+      'imagemPrincipal': imagemPrincipal,
       'login': login,
       'cpf': cpf,
       'dataNascimento': dataNascimento.toIso8601String(),

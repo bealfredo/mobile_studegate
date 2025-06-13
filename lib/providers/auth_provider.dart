@@ -16,6 +16,10 @@ class AuthProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
+  AuthProvider() {
+    checkLoginStatus(); // <- aqui é mais seguro
+  }
+
   // Limpar mensagem de erro
   void clearError() {
     _errorMessage = null;
@@ -43,6 +47,8 @@ class AuthProvider extends ChangeNotifier {
       'matriculaPendente': _user!.matriculaPendente,
       'nome': _user!.nome,
       'sobrenome': _user!.sobrenome,
+      'imagens': _user!.imagens,
+      'imagemPrincipal': _user!.imagemPrincipal,
       'login': _user!.login,
       'cpf': _user!.cpf,
       'dataNascimento': _user!.dataNascimento.toIso8601String(),
@@ -64,12 +70,17 @@ class AuthProvider extends ChangeNotifier {
         matriculaPendente: userData['matriculaPendente'],
         nome: userData['nome'],
         sobrenome: userData['sobrenome'],
+        imagens: List<String>.from(userData['imagens'] ?? []),
+        imagemPrincipal: userData['imagemPrincipal'] ?? '',
         login: userData['login'],
         cpf: userData['cpf'],
         dataNascimento: DateTime.parse(userData['dataNascimento']),
       );
-      notifyListeners();
+    } else {
+      _user = null;
     }
+    _isLoading = false;
+    notifyListeners();
   }
   
   // Métodos login e logout

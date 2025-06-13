@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_studegate/screeens/boletim/boletim_screen.dart';
+import 'package:mobile_studegate/screeens/grade_curricular/grade_curricular_screen.dart';
 import 'package:mobile_studegate/screeens/home/home_screen.dart';
 import 'package:mobile_studegate/screeens/media/media_list_screen.dart';
 import 'package:mobile_studegate/screeens/login/login_screen.dart'; // Supondo que você tenha uma tela de login
+import 'package:mobile_studegate/screeens/rematricula_online/rematricula_online_screen.dart';
+import 'package:mobile_studegate/screeens/situacao_academica/situacao_academica_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/auth_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,7 +19,7 @@ const Color accentGray = Color(0xFF666666);
 const Color lightGray = Color(0xFFAAAAAA);
 const Color backgroundColor = Color(0xFF222222);
 
-const primaryColor = primaryGray;
+const primaryColor = Color.fromARGB(255, 38, 74, 179);
 const primaryColorLight = secondaryGray;
 const secondaryColor = accentGray;
 const secondaryColorLight = lightGray;
@@ -30,8 +34,18 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,19 +55,15 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<AuthProvider>(
         builder: (context, authProvider, child) {
-          // Verificar status de login quando o app iniciar
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            authProvider.checkLoginStatus();
-          });
-          
           return MaterialApp(
             title: 'StudeGate',
             theme: ThemeData(
               primarySwatch: Colors.blue,
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            // Você pode usar o estado de autenticação para decidir qual tela mostrar
-            home: authProvider.isLoggedIn ? NavigationBarApp() : LoginScreen(),
+            home: authProvider.user != null
+                ? const NavigationBarApp()
+                : const LoginScreen(),
           );
         },
       ),
@@ -67,7 +77,14 @@ class NavigationBarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
+      // theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+        primaryColor: primaryColor,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: primaryColor, // Cor primária
+          secondary: secondaryColor, // Cor secundária
+        ),
+      ),
       home: const NavigationExample(),
     );
   }
@@ -88,6 +105,8 @@ class _NavigationExampleState extends State<NavigationExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: NavigationBar(
+        
+
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
@@ -100,15 +119,46 @@ class _NavigationExampleState extends State<NavigationExample> {
             icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
+
           NavigationDestination(
-            icon: Icon(Icons.movie_creation_outlined),
-            label: 'Mídias',
+            selectedIcon: Icon(Icons.book),
+            icon: Icon(Icons.book_outlined),
+            label: 'Boletim',
           ),
+
+          NavigationDestination(
+            selectedIcon: Icon(Icons.school),
+            icon: Icon(Icons.school_outlined),
+            label: 'Grade',
+          ),
+
+          NavigationDestination(
+            selectedIcon: Icon(Icons.how_to_reg),
+            icon: Icon(Icons.how_to_reg_outlined),
+            label: 'Rematrícula',
+          ),
+
+          NavigationDestination(
+            selectedIcon: Icon(Icons.insights),
+            icon: Icon(Icons.insights_outlined),
+            label: 'Análise',
+          ),
+
+          NavigationDestination(
+            selectedIcon: Icon(Icons.account_circle),
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'Situação'
+          ),
+
         ],
       ),
       body: <Widget>[
         HomeScreen(), // Exemplo: botão para deslogar
         MediaListScaffold(),
+        BoletimScaffold(),
+        GradeCurricularScaffold(),
+        RematriculaOnlineScaffold(),
+        SituacaoAcademicaScaffold(),
       ][currentPageIndex],
     );
   }
