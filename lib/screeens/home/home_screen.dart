@@ -118,10 +118,10 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-              Text(
-                'Avalie tudo o que você assiste, lê, joga e ouve',
-                style: TextStyle(fontSize: 18, color: Colors.white70),
-              ),
+              // Text(
+              //   '',
+              //   style: TextStyle(fontSize: 18, color: Colors.white70),
+              // ),
               SizedBox(height: 40),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
