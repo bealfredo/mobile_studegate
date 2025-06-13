@@ -1,8 +1,57 @@
 # mobile_studegate
 
-Aplicativo Flutter para gerenciar e avaliar diversos tipos de mídias, como filmes, séries, livros, jogos e muito mais.
+Aluno: *ALFREDO DE SOUZA AGUIAR NETO* e *ANA BEATRIZ MARQUES MOREIRA*
 
-**Você pode baixar o aplicativo para Android aqui:** [Download](https://drive.google.com/file/d/1wAxF1tJ6YBwpLQLSX4RY7r24QfOlge-K/view?usp=sharing)
+## Usuários para Teste
+
+- **maria@gmail.com**  
+  Senha: **maria**
+
+- **pedro@gmail.com**  
+  Senha: **pedro**
+  
+
+## Funcionalidades do Sistema
+
+O aplicativo acadêmico desenvolvido para a disciplina de PROGRAMAÇÃO PARA DISPOSIVOS MÓVEIS I oferece diversas funcionalidades voltadas à gestão e acompanhamento da vida acadêmica dos alunos. A seguir, estão descritas as principais funcionalidades do sistema:
+
+### 1. Login
+Permite o acesso seguro ao sistema por meio de autenticação com e-mail e senha. Usuários cadastrados podem acessar suas informações acadêmicas.
+
+### 2. Dashboard (Tela Inicial)
+Após o login, o usuário é direcionado para a tela inicial, que apresenta seis cards de navegação para as principais funcionalidades do sistema:
+
+- **Boletim (Semestre Atual):** Visualização do desempenho nas disciplinas do semestre, incluindo nome da disciplina, nota, frequência e status.
+- **Grade Curricular:** Exibição da grade curricular do curso, com seleção de curso via dropdown e listagem das disciplinas por período.
+- **Rematrícula Online:** Possibilita a seleção de disciplinas para rematrícula, com botão de confirmação.
+- **Situação Acadêmica:** Mostra o status acadêmico do aluno, como situação de documentos, pendências e matrícula ativa.
+- **Análise Curricular:** Permite acompanhar o progresso do curso, mostrando uma barra de porcentagem e listando disciplinas concluídas e pendentes.
+
+### 3. Boletim
+Exibe a lista de disciplinas do semestre atual, apresentando informações como nome, nota, frequência e status de aprovação.
+
+### 4. Grade Curricular
+Permite ao aluno visualizar a grade curricular completa, selecionar o curso (quando aplicável) e acessar a relação de disciplinas organizadas por período.
+
+### 5. Rematrícula
+Facilita o processo de rematrícula, onde o aluno pode selecionar as disciplinas desejadas e confirmar a matrícula em um único lugar.
+
+### 6. Situação Acadêmica
+Apresenta o estado atual do aluno em relação a documentos, pendências financeiras ou acadêmicas, e matrícula.
+
+### 7. Análise Curricular
+Mostra o avanço do aluno no curso por meio de uma barra de porcentagem e lista detalhada de disciplinas já concluídas e aquelas que ainda precisam ser cursadas.
+
+---
+
+Essas funcionalidades visam proporcionar uma experiência completa para o aluno no acompanhamento de sua trajetória acadêmica, tornando o gerenciamento de informações mais prático e acessível.
+
+
+
+
+<!-- Aplicativo Flutter para gerenciar e avaliar diversos tipos de mídias, como filmes, séries, livros, jogos e muito mais. -->
+
+<!-- **Você pode baixar o aplicativo para Android aqui:** [Download](https://drive.google.com/file/d/1wAxF1tJ6YBwpLQLSX4RY7r24QfOlge-K/view?usp=sharing)
 
 ## Sobre o Aplicativo
 
@@ -57,7 +106,7 @@ Alguns recursos para começar se este for seu primeiro projeto Flutter:
 - [Lab: Escreva seu primeiro aplicativo Flutter](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Exemplos úteis de Flutter](https://docs.flutter.dev/cookbook)
 
-Para obter ajuda no desenvolvimento com Flutter, acesse a [documentação online](https://docs.flutter.dev/), que oferece tutoriais, exemplos, orientações sobre desenvolvimento móvel e uma referência completa da API.
+Para obter ajuda no desenvolvimento com Flutter, acesse a [documentação online](https://docs.flutter.dev/), que oferece tutoriais, exemplos, orientações sobre desenvolvimento móvel e uma referência completa da API. -->
 
 
 <!-- Refatorar: 
