@@ -18,6 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
 
+    final unitinsImageUrl = 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Logo_marca_Unitins_2021.png'; // URL do logo da UNITINS
+
     return Scaffold(
       // Usamos Stack para sobrepor o formulário ao fundo
       body: Stack(
@@ -55,9 +57,40 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       // Logo da instituição
                       // Certifique-se de ter o logo em assets/unitins_logo.png
-                      Image.asset(
-                        'assets/unitins_logo.png',
-                        height: 60,
+                      Image.network(
+                        unitinsImageUrl,
+                        width: 200,
+                        height: 200,
+                        fit: BoxFit.contain, // ou BoxFit.cover, dependendo da aparência desejada
+                        loadingBuilder: (
+                          BuildContext context,
+                          Widget child,
+                          ImageChunkEvent? loadingProgress,
+                        ) {
+                          if (loadingProgress == null) return child;
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        },
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            width: 200,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                            ),
+                            child: Icon(
+                              Icons.person,
+                              size: 100,
+                              color: Colors.grey[600],
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(height: 16),
 
