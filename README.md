@@ -48,16 +48,18 @@ Essas funcionalidades visam proporcionar uma experiência completa para o aluno 
 
 ## Screenshots do Aplicativo
 
-<div align="center">
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1200px;">
-    <img src="readme-images/login.png" alt="Tela de login" style="width: 100%; border-radius: 8px;"/>
-    <img src="readme-images/inicio.png" alt="Tela inicial" style="width: 100%; border-radius: 8px;"/>
-    <img src="readme-images/boletim1.png" alt="Tela de boletim 1" style="width: 100%; border-radius: 8px;"/>
-    <img src="readme-images/boletim2.png" alt="Tela de boletim 2" style="width: 100%; border-radius: 8px;"/>
-    <img src="readme-images/situacao1.png" alt="Tela de situação 1" style="width: 100%; border-radius: 8px;"/>
-    <img src="readme-images/situacao2.png" alt="Tela de situação 2" style="width: 100%; border-radius: 8px;"/>
-  </div>
-</div>
+<table style="border-collapse: collapse; border: none;">
+  <tr style="border: none;">
+    <td style="border: none; padding: 10px;"><img src="readme-images/login.png" alt="Tela de login" width="100%" style="border-radius: 10px;"/></td>
+    <td style="border: none; padding: 10px;"><img src="readme-images/inicio.png" alt="Tela inicial" width="100%" style="border-radius: 10px;"/></td>
+    <td style="border: none; padding: 10px;"><img src="readme-images/boletim1.png" alt="Tela de boletim 1" width="100%" style="border-radius: 10px;"/></td>
+  </tr>
+  <tr style="border: none;">
+    <td style="border: none; padding: 10px;"><img src="readme-images/boletim2.png" alt="Tela de boletim 2" width="100%" style="border-radius: 10px;"/></td>
+    <td style="border: none; padding: 10px;"><img src="readme-images/situacao1.png" alt="Tela de situação 1" width="100%" style="border-radius: 10px;"/></td>
+    <td style="border: none; padding: 10px;"><img src="readme-images/situacao2.png" alt="Tela de situação 2" width="100%" style="border-radius: 10px;"/></td>
+  </tr>
+</table>
 
 
 <!-- Aplicativo Flutter para gerenciar e avaliar diversos tipos de mídias, como filmes, séries, livros, jogos e muito mais. -->
