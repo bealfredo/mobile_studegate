@@ -46,7 +46,18 @@ Mostra o avanço do aluno no curso por meio de uma barra de porcentagem e lista 
 
 Essas funcionalidades visam proporcionar uma experiência completa para o aluno no acompanhamento de sua trajetória acadêmica, tornando o gerenciamento de informações mais prático e acessível.
 
+## Screenshots do Aplicativo
 
+<div align="center">
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1200px;">
+    <img src="readme-images/login.png" alt="Tela de login" style="width: 100%; border-radius: 8px;"/>
+    <img src="readme-images/inicio.png" alt="Tela inicial" style="width: 100%; border-radius: 8px;"/>
+    <img src="readme-images/boletim1.png" alt="Tela de boletim 1" style="width: 100%; border-radius: 8px;"/>
+    <img src="readme-images/boletim2.png" alt="Tela de boletim 2" style="width: 100%; border-radius: 8px;"/>
+    <img src="readme-images/situacao1.png" alt="Tela de situação 1" style="width: 100%; border-radius: 8px;"/>
+    <img src="readme-images/situacao2.png" alt="Tela de situação 2" style="width: 100%; border-radius: 8px;"/>
+  </div>
+</div>
 
 
 <!-- Aplicativo Flutter para gerenciar e avaliar diversos tipos de mídias, como filmes, séries, livros, jogos e muito mais. -->

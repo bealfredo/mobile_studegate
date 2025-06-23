@@ -167,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               // TODO: Implementar lógica do link AVA
                             },
                             icon: const Icon(Icons.school_outlined, size: 20),
-                            label: const Text('AVA (Turmas 2001-2008)'),
+                            label: const Text('AVA (2001-2008)'),
                           ),
                         ],
                       ),
